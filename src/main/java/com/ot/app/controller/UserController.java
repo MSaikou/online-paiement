@@ -1,7 +1,10 @@
 package com.ot.app.controller;
 
+import com.ot.app.dto.UserDto;
 import com.ot.app.model.User;
 import com.ot.app.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +18,9 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestParam String name, @RequestParam double balance) {
-        return userService.createUser(name, balance);
+    public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
+        User user = userService.createUser(userDto);
+        return ResponseEntity.of(user);
     }
 
     @GetMapping("/{userId}/balances")

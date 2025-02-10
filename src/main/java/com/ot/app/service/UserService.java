@@ -1,5 +1,6 @@
 package com.ot.app.service;
 
+import com.ot.app.dto.UserDto;
 import com.ot.app.model.User;
 import com.ot.app.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(String name, double balance) {
+    public User createUser(UserDto userDto) {
         User user = new User();
-        user.setName(name);
-        user.setBalance(balance);
+        user.setName(userDto.getName());
+        user.setBalance(userDto.getBalance());
         return userRepository.save(user);
     }
 
