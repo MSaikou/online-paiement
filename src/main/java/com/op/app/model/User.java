@@ -1,4 +1,4 @@
-package com.ot.app.model;
+package com.op.app.model;
 
 import jakarta.persistence.*;
 

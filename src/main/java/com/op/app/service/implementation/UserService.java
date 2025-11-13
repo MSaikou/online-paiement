@@ -1,12 +1,13 @@
-package com.ot.app.service;
+package com.op.app.service.implementation;
 
-import com.ot.app.dto.UserDto;
-import com.ot.app.model.User;
-import com.ot.app.repository.UserRepository;
+import com.op.app.dto.UserDto;
+import com.op.app.model.User;
+import com.op.app.repository.UserRepository;
+import com.op.app.service.UserSerivce;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements UserSerivce {
 
     private final UserRepository userRepository;
 

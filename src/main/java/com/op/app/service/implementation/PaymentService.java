@@ -1,15 +1,15 @@
-package com.ot.app.service;
+package com.op.app.service.implementation;
 
-import com.ot.app.model.Transaction;
-import com.ot.app.model.User;
-import com.ot.app.repository.PaymentRepository;
-import com.ot.app.repository.UserRepository;
+import com.op.app.model.Transaction;
+import com.op.app.model.User;
+import com.op.app.repository.PaymentRepository;
+import com.op.app.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-public class PaymentService {
+public class PaymentService implements com.op.app.service.PaymentService {
     private final UserRepository userRepository;
     private final PaymentRepository paymentRepository;
 
