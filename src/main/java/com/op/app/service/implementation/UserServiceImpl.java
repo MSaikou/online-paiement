@@ -1,22 +1,23 @@
 package com.op.app.service.implementation;
 
 import com.op.app.dto.UserDto;
+import com.op.app.exception.UtilisateurNonTrouverException;
 import com.op.app.model.User;
 import com.op.app.repository.UserRepository;
-import com.op.app.service.UserSerivce;
+import com.op.app.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserSerivce {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public User createUser(UserDto userDto) {
-        User user = new User();
+        var user = new User();
         user.setName(userDto.getName());
         user.setBalance(userDto.getBalance());
         return userRepository.save(user);
@@ -24,6 +25,6 @@ public class UserService implements UserSerivce {
 
     public double getBalance(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non trouve")).getBalance();
+                .orElseThrow(() -> new UtilisateurNonTrouverException("Utilisateur non trouve")).getBalance();
     }
 }

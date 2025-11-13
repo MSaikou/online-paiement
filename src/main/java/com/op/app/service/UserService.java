@@ -3,7 +3,7 @@ package com.op.app.service;
 import com.op.app.dto.UserDto;
 import com.op.app.model.User;
 
-public interface UserSerivce {
+public interface UserService {
 
     /**
      * Methode de creation d'utilisateur

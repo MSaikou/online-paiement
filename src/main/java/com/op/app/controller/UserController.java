@@ -2,7 +2,7 @@ package com.op.app.controller;
 
 import com.op.app.dto.UserDto;
 import com.op.app.model.User;
-import com.op.app.service.implementation.UserService;
+import com.op.app.service.implementation.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Utilisateurs", description = "Api de gestion des Uitilisateurs")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @Operation(operationId = "createUserId", description = "Créer un nouvel utilisateur")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Utilisateur creer", content = @Content(schema = @Schema(implementation = User.class)))})
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
-        User user = userService.createUser(userDto);
+        User user = userServiceImpl.createUser(userDto);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -35,6 +35,6 @@ public class UserController {
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Information récupérer avec succès.", content = @Content(schema = @Schema(implementation = Double.class)))})
     @GetMapping("/{userId}/balances")
     public double getBalance(@PathVariable Long userId) {
-        return userService.getBalance(userId);
+        return userServiceImpl.getBalance(userId);
     }
 }

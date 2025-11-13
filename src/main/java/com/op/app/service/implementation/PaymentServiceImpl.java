@@ -1,31 +1,32 @@
 package com.op.app.service.implementation;
 
+import com.op.app.exception.SoldeInsuffisantException;
 import com.op.app.model.Transaction;
-import com.op.app.model.User;
 import com.op.app.repository.PaymentRepository;
 import com.op.app.repository.UserRepository;
+import com.op.app.service.PaymentService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-public class PaymentService implements com.op.app.service.PaymentService {
+public class PaymentServiceImpl implements PaymentService {
     private final UserRepository userRepository;
     private final PaymentRepository paymentRepository;
 
 
-    public PaymentService(UserRepository userRepository, PaymentRepository paymentRepository) {
+    public PaymentServiceImpl(UserRepository userRepository, PaymentRepository paymentRepository) {
         this.userRepository = userRepository;
         this.paymentRepository = paymentRepository;
     }
 
     public Transaction makePayment(Long senderId, Long receiverId, double amount) {
 
-        User sender = userRepository.findById(senderId).orElseThrow(() -> new RuntimeException("Expediteur non trouver"));
-        User receiver = userRepository.findById(receiverId).orElseThrow(() -> new RuntimeException("Destinataire non trouver"));
+        var sender = userRepository.findById(senderId).orElseThrow(() -> new RuntimeException("Expediteur non trouver"));
+        var receiver = userRepository.findById(receiverId).orElseThrow(() -> new RuntimeException("Destinataire non trouver"));
 
         if (sender.getBalance() < amount) {
-            throw new RuntimeException("Solde insuffisant");
+            throw new SoldeInsuffisantException("Solde insuffisant");
         }
 
         sender.setBalance(sender.getBalance() - amount);
