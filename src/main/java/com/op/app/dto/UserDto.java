@@ -1,8 +1,7 @@
-package com.ot.app.dto;
+package com.op.app.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-
 
 public class UserDto {
     @NotBlank(message = "Le nom est obligatoire")
